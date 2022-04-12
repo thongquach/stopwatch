@@ -61,10 +61,11 @@ function StopWatchRunning({ requestPause, requestStop, startTimeMs }) {
 }
 
 function StopWatchPausing({ requestResume, requestReset, startTimeMs }) {
+  const durationMs = UseNow() - startTimeMs;
   return (
     <div>
       <h4>Pausing</h4>
-      <Duration durationMs={startTimeMs} />
+      <Duration durationMs={durationMs} />
       <footer>
         <button onClick={requestResume}>Resume</button>
         <button onClick={requestReset}>Stop</button>
@@ -74,7 +75,7 @@ function StopWatchPausing({ requestResume, requestReset, startTimeMs }) {
 }
 function App() {
   const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
   const [time, setTime] = useState(Date.now());
 
   const initial = !isActive;
@@ -88,8 +89,6 @@ function App() {
 
   const handlePauseResume = () => {
     setIsPaused(!isPaused);
-    const durationMs = time;
-    setTime(durationMs);
   };
 
   const handleReset = () => {
@@ -109,7 +108,6 @@ function App() {
               requestPause={handlePauseResume}
               requestStop={handleReset}
               startTimeMs={time}
-              setTime={setTime}
             />
           }
         </div>
@@ -119,8 +117,8 @@ function App() {
         <div>
           {
             <StopWatchPausing
-              requestPause={handlePauseResume}
-              requestStop={handleReset}
+              requestResume={handlePauseResume}
+              requestReset={handleReset}
               startTimeMs={time}
             />
           }
