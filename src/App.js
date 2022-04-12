@@ -61,11 +61,10 @@ function StopWatchRunning({ requestPause, requestStop, startTimeMs }) {
 }
 
 function StopWatchPausing({ requestResume, requestReset, startTimeMs }) {
-  const durationMs = UseNow() - startTimeMs;
   return (
     <div>
       <h4>Pausing</h4>
-      <Duration durationMs={durationMs} />
+      <Duration durationMs={startTimeMs} />
       <footer>
         <button onClick={requestResume}>Resume</button>
         <button onClick={requestReset}>Stop</button>
@@ -89,6 +88,7 @@ function App() {
 
   const handlePauseResume = () => {
     setIsPaused(!isPaused);
+    setTime(Date.now() - time);
   };
 
   const handleReset = () => {
