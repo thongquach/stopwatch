@@ -1,8 +1,8 @@
-import { useState } from "react";
-import "./App.css";
-import InitialStopwatch from "./components/InitialStopwatch";
-import RunningStopwatch from "./components/RunningStopwatch";
-import PausingStopwatch from "./components/PausingStopwatch";
+import { useState } from 'react';
+import './App.css';
+import InitialStopwatch from './components/InitialStopwatch';
+import RunningStopwatch from './components/RunningStopwatch';
+import PausingStopwatch from './components/PausingStopwatch';
 
 function App() {
   const [isActive, setIsActive] = useState(false);
@@ -31,7 +31,6 @@ function App() {
   return (
     <div>
       {initial && <InitialStopwatch requestStart={handleStart} />}
-
       {running && (
         <RunningStopwatch
           requestPause={handlePauseResume}
@@ -39,7 +38,6 @@ function App() {
           startTimeMs={time}
         />
       )}
-
       {isPausing && (
         <PausingStopwatch
           requestResume={handlePauseResume}
