@@ -1,11 +1,7 @@
-import useNow from "../utils/useNow";
-import Duration from "./Duration";
+import useNow from '../utils/useNow';
+import Duration from './Duration';
 
-export default function RunningStopwatch({
-  requestPause,
-  requestStop,
-  startTimeMs,
-}) {
+export default function RunningStopwatch({ requestPause, requestStop, startTimeMs }) {
   const durationMs = useNow() - startTimeMs;
 
   return (

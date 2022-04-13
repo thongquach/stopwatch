@@ -1,10 +1,6 @@
-import Duration from "./Duration";
+import Duration from './Duration';
 
-export default function PausingStopwatch({
-  requestResume,
-  requestReset,
-  startTimeMs,
-}) {
+export default function PausingStopwatch({ requestResume, requestReset, startTimeMs }) {
   return (
     <div>
       <h4>Pausing</h4>
