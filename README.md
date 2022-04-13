@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Principles and Design Patterns of React Programming - batch01 - Group 8
 
 ## Available Scripts
 
