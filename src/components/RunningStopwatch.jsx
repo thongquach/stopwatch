@@ -1,17 +1,17 @@
 import useNow from '../utils/useNow';
 import Duration from './Duration';
 
-export default function RunningStopwatch({ requestPause, requestStop, startTimeMs }) {
+export default function RunningStopwatch({ requestStop, requestLap, startTimeMs }) {
   const durationMs = useNow() - startTimeMs;
 
   return (
-    <div>
-      <h4>Running</h4>
+    <>
+      <h4>Running ...</h4>
       <Duration durationMs={durationMs} />
       <footer>
-        <button onClick={requestPause}>Pause</button>
         <button onClick={requestStop}>Stop</button>
+        <button onClick={requestLap}>Lap</button>
       </footer>
-    </div>
+    </>
   );
 }
