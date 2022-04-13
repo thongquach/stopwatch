@@ -10,12 +10,13 @@ const MAX_LAPS = 10;
 function App() {
   const [isInitial, setIsInitial] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
-  const [time, setTime] = useState(Date.now());
+  const [time, setTime] = useState();
   const [laps, setLaps] = useState([]);
 
   const handleStart = () => {
     setIsInitial(false);
     setIsRunning(true);
+    setTime(Date.now());
   };
 
   const handleStopResume = () => {
