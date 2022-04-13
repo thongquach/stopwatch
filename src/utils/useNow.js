@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export default function useNow() {
   const [now, setNow] = useState(Date.now());
@@ -10,6 +10,7 @@ export default function useNow() {
       id = requestAnimationFrame(repaint);
     }
     repaint();
+
     return () => {
       cancelAnimationFrame(id);
     };

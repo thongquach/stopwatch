@@ -2,50 +2,59 @@ import { useState } from 'react';
 import './App.css';
 import InitialStopwatch from './components/InitialStopwatch';
 import RunningStopwatch from './components/RunningStopwatch';
-import PausingStopwatch from './components/PausingStopwatch';
+import StoppedStopwatch from './components/StoppedStopwatch';
+import Laps from './components/Laps';
+
+const MAX_LAPS = 10;
 
 function App() {
-  const [isActive, setIsActive] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isInitial, setIsInitial] = useState(true);
+  const [isRunning, setIsRunning] = useState(false);
   const [time, setTime] = useState(Date.now());
-
-  const initial = !isActive;
-  const running = isActive && !isPaused;
-  const isPausing = isActive && isPaused;
+  const [laps, setLaps] = useState([]);
 
   const handleStart = () => {
-    setIsActive(true);
-    setIsPaused(false);
+    setIsInitial(false);
+    setIsRunning(true);
   };
 
-  const handlePauseResume = () => {
-    setIsPaused(!isPaused);
+  const handleStopResume = () => {
+    setIsRunning(!isRunning);
     setTime(Date.now() - time);
   };
 
+  const handleLap = () => {
+    const newLaps = [...laps, Date.now() - time];
+
+    if (newLaps.length <= MAX_LAPS) setLaps(newLaps);
+    else setLaps(newLaps.slice(1));
+  };
+
   const handleReset = () => {
-    setIsActive(false);
+    setIsInitial(true);
+    setLaps([]);
     setTime(Date.now());
   };
 
   return (
-    <div>
-      {initial && <InitialStopwatch requestStart={handleStart} />}
-      {running && (
+    <>
+      {isInitial && <InitialStopwatch requestStart={handleStart} />}
+      {isRunning && (
         <RunningStopwatch
-          requestPause={handlePauseResume}
-          requestStop={handleReset}
+          requestStop={handleStopResume}
+          requestLap={handleLap}
           startTimeMs={time}
         />
       )}
-      {isPausing && (
-        <PausingStopwatch
-          requestResume={handlePauseResume}
+      {!isInitial && !isRunning && (
+        <StoppedStopwatch
           requestReset={handleReset}
+          requestResume={handleStopResume}
           startTimeMs={time}
         />
       )}
-    </div>
+      <Laps laps={laps} />
+    </>
   );
 }
 
